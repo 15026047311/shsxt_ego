@@ -1,7 +1,10 @@
 package com.shsxt.ego.rpc.mapper.db.dao;
 
+import com.shsxt.ego.rpc.pojo.TbItemParam;
 import com.shsxt.ego.rpc.pojo.TbItemParamItem;
+import com.shsxt.ego.rpc.query.ItemQuery;
 
+import java.util.List;
 import java.util.Map;
 
 public interface TbItemParamItemMapper {
@@ -20,5 +23,6 @@ public interface TbItemParamItemMapper {
     int updateByPrimaryKey(TbItemParamItem record);
     //批量删除商品接口,真删除
     int deleteItemParamItemBatch(Map<String,Object> param);
+
 
 }

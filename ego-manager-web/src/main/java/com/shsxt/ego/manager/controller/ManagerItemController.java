@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 public class ManagerItemController {
     @Resource
     private IManagerItemService managerItemService;
+    //分页查询
     @RequestMapping("item/list")
     @ResponseBody
     public PageResult<TbItem> itemList(ItemQuery itemQuery){
@@ -40,5 +41,11 @@ public class ManagerItemController {
     @ResponseBody
     public EgoResult delete(Long[] ids){
         return managerItemService.deleteItemBatch(ids);
+    }
+    //商品保存
+    @RequestMapping("item/save")
+    @ResponseBody
+    public EgoResult save(TbItem item,String desc){
+        return managerItemService.saveItem(item,desc);
     }
 }

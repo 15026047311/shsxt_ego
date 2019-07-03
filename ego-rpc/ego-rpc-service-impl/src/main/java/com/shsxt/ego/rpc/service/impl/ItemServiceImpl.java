@@ -80,5 +80,13 @@ public class ItemServiceImpl implements IItemService {
         itemParamItemMapper.deleteItemParamItemBatch(param);
         return new EgoResult();
     }
+//商品新增保存
+    @Override
+    public EgoResult saveItem(TbItem item, TbItemDesc itemDesc) {
+        itemMapper.insertSelective(item);//商品信息表新增犯法
+        itemDescMapper.insertSelective(itemDesc);//商品描述表新增方法
+        return new EgoResult();//返回结果集
+    }
+
 
 }

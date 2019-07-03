@@ -16,6 +16,7 @@
         <module>ego-rpc-pojo</module>
         <module>ego-rpc-service</module>
         <module>ego-rpc-service-impl</module>
+        <module>ego-rpc-dto</module>
     </modules>
 
 

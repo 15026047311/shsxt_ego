@@ -14,4 +14,6 @@ public interface IManagerItemService {
     public EgoResult instock(Long[] ids);
     //商品的批量删除
    public EgoResult deleteItemBatch(Long[] ids);
+   //商品新增
+    public EgoResult saveItem(TbItem item,String desc);
 }

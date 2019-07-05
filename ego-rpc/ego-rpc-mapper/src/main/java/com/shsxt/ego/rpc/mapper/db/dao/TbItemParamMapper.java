@@ -22,5 +22,9 @@ public interface TbItemParamMapper {
     int updateByPrimaryKey(TbItemParam record);
     //分页查询
     public List<TbItemParam> queryItemsByParams(ItemQuery itemQuery);
+    //添加操作,判断数据是否重复
+    TbItemParam queryItemParamByItemCatId(Long itemCatId);
+    //批量删除
+    int deleteItemParamBatch(Long[] ids);
 
 }

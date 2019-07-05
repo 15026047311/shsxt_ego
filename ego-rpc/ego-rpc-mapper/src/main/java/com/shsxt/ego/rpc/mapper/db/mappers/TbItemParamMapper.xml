@@ -6,11 +6,11 @@
     <result column="item_cat_id" property="itemCatId" jdbcType="BIGINT" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
-    <!--itemcat表商品规格名称-->
-    <result column="name" property="itemCatName" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.shsxt.ego.rpc.pojo.TbItemParam" extends="BaseResultMap" >
     <result column="param_data" property="paramData" jdbcType="LONGVARCHAR" />
+    <!--itemcat表商品规格名称-->
+    <result column="name" property="itemCatName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, item_cat_id, created, updated
@@ -106,18 +106,36 @@
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <!--分页查询商品规格信息-->
-  <select id="queryItemsByParams" parameterType="com.shsxt.ego.rpc.query.ItemQuery" resultMap="BaseResultMap" >
-      SELECT
-    tb_item_param.id as id,
-    tb_item_param.item_cat_id as itemCatId,
-    tb_item_cat.`name` as itemCatName,
-    tb_item_param.param_data as paramData,
-    tb_item_param.created as created,
-    tb_item_param.updated as updated
-    FROM
-    tb_item_cat ,
-    tb_item_param
+  <!--分页查询商品规格信息ResultMapWithBLOBs意思是全部列数据-->
+  <select id="queryItemsByParams" parameterType="com.shsxt.ego.rpc.query.ItemQuery" resultMap="ResultMapWithBLOBs" >
+         SELECT
+        ip.id,
+        item_cat_id,
+        ip.created,
+        ip.updated,
+        param_data,
+        ic. NAME AS itemCatName
+        FROM
+            tb_item_param ip
+        LEFT JOIN tb_item_cat ic ON ip.item_cat_id = ic.id
   </select>
+
+  <!--判断item_catid商品名称是否存在,存在不允许重复添加-->
+  <select id="queryItemParamByItemCatId" parameterType="long" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_item_param
+    WHERE item_cat_id=#{itemCatId}
+  </select>
+  <!--批量删除-->
+  <delete id="deleteItemParamBatch">
+    DELETE  from tb_item_param
+    where id IN
+    <foreach collection="array" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
 
 </mapper>

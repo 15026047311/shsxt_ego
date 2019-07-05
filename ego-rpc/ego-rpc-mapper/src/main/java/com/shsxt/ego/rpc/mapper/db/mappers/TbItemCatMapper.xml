@@ -125,7 +125,7 @@
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <!--新增商品信息,如果是父目录is_parent状态码为1的则为-->
+  <!--新增商品信息,如果是父目录is_parent状态码为1-->
   <select id="queryItemCatsByParentId" parameterType="long" resultType="com.shsxt.ego.rpc.dto.TreeDto">
     SELECT
         id,
@@ -141,6 +141,9 @@
     WHERE
         parent_id = #{id}
   </select>
-
+<!--查询所有的商品信息-->
+  <select id="queryAllItemCats" resultMap="BaseResultMap">
+    SELECT * FROM tb_item_cat WHERE `status`=1
+  </select>
 
 </mapper>

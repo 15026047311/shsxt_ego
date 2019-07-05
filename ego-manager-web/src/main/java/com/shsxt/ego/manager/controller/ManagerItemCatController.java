@@ -21,6 +21,7 @@ public class ManagerItemCatController {
     private IItemCatService itemCatServiceProxy;
     @RequestMapping("item/cat/list")
     @ResponseBody
+    //防止为空,设置@RequestParam的默认值为0,父节点
     public List<TreeDto> queryItemCatsByParentId(@RequestParam(defaultValue = "0") Long id ){
         return itemCatServiceProxy.queryItemCatsByParentId(id);
     }

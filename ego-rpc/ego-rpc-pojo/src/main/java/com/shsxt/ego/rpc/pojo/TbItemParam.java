@@ -5,14 +5,11 @@ import java.util.Date;
 
 public class TbItemParam implements Serializable {
     private Long id;
-
     private Long itemCatId;
-
     private Date created;
-
     private Date updated;
-
     private String paramData;
+    private String itemCatName;
 
     public Long getId() {
         return id;
@@ -51,6 +48,14 @@ public class TbItemParam implements Serializable {
     }
 
     public void setParamData(String paramData) {
-        this.paramData = paramData == null ? null : paramData.trim();
+        this.paramData = paramData;
+    }
+
+    public String getItemCatName() {
+        return itemCatName;
+    }
+
+    public void setItemCatName(String itemCatName) {
+        this.itemCatName = itemCatName;
     }
 }

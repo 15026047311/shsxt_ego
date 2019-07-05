@@ -2,6 +2,7 @@ package com.shsxt.ego.rpc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shsxt.ego.common.model.EgoResult;
 import com.shsxt.ego.common.model.PageResult;
 import com.shsxt.ego.rpc.dto.TbItemParamDto1;
 import com.shsxt.ego.rpc.mapper.db.dao.TbItemParamItemMapper;
@@ -32,5 +33,23 @@ public class ItemParamServiceImpl implements ItemParamService {
         pageResult.setTotal(pageInfo.getTotal());
         pageResult.setRows(pageInfo.getList());
         return  pageResult;
+    }
+//判断商品规格信息,是否有重复
+    @Override
+    public TbItemParam queryItemParamByItemCatId(Long itemCatId) {
+       return itemParamMapper.queryItemParamByItemCatId(itemCatId);
+
+    }
+//保存按钮
+    @Override
+    public EgoResult saveItem(TbItemParam itemParam) {
+        itemParamMapper.insertSelective(itemParam);
+        return new EgoResult();
+    }
+//批量删除商品规格信息
+    @Override
+    public EgoResult deleteItemParamBatch(Long[] ids) {
+        itemParamMapper.deleteItemParamBatch(ids);
+        return new EgoResult();
     }
 }

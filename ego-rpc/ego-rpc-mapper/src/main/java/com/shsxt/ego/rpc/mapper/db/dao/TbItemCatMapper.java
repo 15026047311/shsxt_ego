@@ -20,4 +20,6 @@ public interface TbItemCatMapper {
 
     int updateByPrimaryKey(TbItemCat record);
     List<TreeDto> queryItemCatsByParentId(Long id);
+    //portal层前台门户网站显示树形数据
+    List<TbItemCat> queryAllItemCats();
 }

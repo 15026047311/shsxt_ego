@@ -9,6 +9,7 @@ import com.shsxt.ego.rpc.mapper.db.dao.TbItemMapper;
 import com.shsxt.ego.rpc.mapper.db.dao.TbItemParamItemMapper;
 import com.shsxt.ego.rpc.pojo.TbItem;
 import com.shsxt.ego.rpc.pojo.TbItemDesc;
+import com.shsxt.ego.rpc.pojo.TbItemParamItem;
 import com.shsxt.ego.rpc.query.ItemQuery;
 import com.shsxt.ego.rpc.service.IItemService;
 import org.aspectj.apache.bcel.util.ClassLoaderRepository;
@@ -80,13 +81,17 @@ public class ItemServiceImpl implements IItemService {
         itemParamItemMapper.deleteItemParamItemBatch(param);
         return new EgoResult();
     }
-//商品新增保存
+    //商品新增保存
     @Override
-    public EgoResult saveItem(TbItem item, TbItemDesc itemDesc) {
+    public EgoResult saveItem(TbItem item, TbItemDesc itemDesc, TbItemParamItem itemParamItem) {
         itemMapper.insertSelective(item);//商品信息表新增犯法
         itemDescMapper.insertSelective(itemDesc);//商品描述表新增方法
+        itemParamItemMapper.insertSelective(itemParamItem);
         return new EgoResult();//返回结果集
     }
+
+
+
 
 
 }

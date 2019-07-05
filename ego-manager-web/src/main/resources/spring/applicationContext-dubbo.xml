@@ -27,5 +27,10 @@
                      id="itemDescServiceProxy"></dubbo:reference>
     <dubbo:reference interface="com.shsxt.ego.rpc.service.ItemParamService"
                      id="itemParamServiceProxy"></dubbo:reference>
+    <dubbo:reference interface="com.shsxt.ego.rpc.service.IContentCategoryService"
+                     id="contentCategoryServiceProxy"></dubbo:reference>
+
+    <dubbo:reference interface="com.shsxt.ego.rpc.service.IContentService"
+                     id="contentServiceProxy"></dubbo:reference>
 
 </beans>

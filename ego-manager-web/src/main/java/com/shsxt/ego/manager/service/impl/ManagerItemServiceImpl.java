@@ -6,6 +6,7 @@ import com.shsxt.ego.common.utils.IDUtils;
 import com.shsxt.ego.manager.service.IManagerItemService;
 import com.shsxt.ego.rpc.pojo.TbItem;
 import com.shsxt.ego.rpc.pojo.TbItemDesc;
+import com.shsxt.ego.rpc.pojo.TbItemParamItem;
 import com.shsxt.ego.rpc.query.ItemQuery;
 import com.shsxt.ego.rpc.service.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class ManagerItemServiceImpl implements IManagerItemService {
     }
 //新增 商品信息
     @Override
-    public EgoResult saveItem(TbItem item, String desc) {
+    public EgoResult saveItem(TbItem item, String desc,String paramData) {
         //设置商品id,uuid保证商品id不重复
         Long itemId = IDUtils.genItemId();//工具类生成id值
         Date time = new Date();//当前时间对象
@@ -58,9 +59,12 @@ public class ManagerItemServiceImpl implements IManagerItemService {
         itemDesc.setCreated(time);
         itemDesc.setUpdated(time);
         //商品规格记录
-
-
-        return itemServiceProxy.saveItem(item,itemDesc);
+        TbItemParamItem itemParamItem = new TbItemParamItem();
+        itemParamItem.setItemId(itemId);
+        itemParamItem.setParamData(paramData);
+        itemParamItem.setUpdated(time);
+        itemParamItem.setCreated(time);
+        return itemServiceProxy.saveItem(item,itemDesc,itemParamItem);
     }
 
 
